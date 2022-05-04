@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jquery example</title>
+    <script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
+    <style>
+        #app {
+            width: 800px;
+            margin: auto;
+            background-color: #FEFBEC;
+            border: 2px solid ;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        #description {
+            text-align: justify;
+        }
+
+        #game {
+            width: 600px;
+            margin-left: 100px;
+            margin-top: 20px;
+            position: relative;
+            border: 2px solid ;
+            border-radius: 10px;
+        }
+
+        #bg {
+            background-color: skyblue;
+            height: 400px;
+            position: relative;
+            border-radius: 10px;
+        }
+
+        #field {
+            background-color: #fff1aa;
+            height: 80px;
+            position: relative;
+            top: 320px;
+        }
+
+        #worm {
+            height: 60px;
+            position: absolute;
+            top: 260px;
+            left: 300px;
+        }
+
+        #buttons {
+
+        }
+
+        .button {
+            display: inline-block;
+            background-color: #f8e9c6;
+            padding: 8px;
+            border: 2px solid;
+            border-radius: 10px;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+    </style>
+    <script>
+        /*
+         Feladatok:
+         A leírás szövegét egészítsük ki az alábbi sorral: "Forrás: PCGURU".
+         A leírásban szereplő fegyverek nevét emeld ki vastag betűvel. (class: weapon)
+         Állítsd át a talaj színét zöldre.
+         Az Elrejt és Megjelenít gombok megnyomására rejtsd el, illetve jelenítsd meg a kukacot.
+         Ugorj egyet a kukaccal a Felugrik gomb megnyomására.
+         Adj hozzá egy új gombot, amely jelenjen meg az eddigiek után, a rajta szereplő felirat legyen: Csere.
+         A Csere megnyomására a kukac képe cserélődjön le a worm2.png-re.
+         A leírásban szereplő összes fegyver nevét tedd idézőjelek közé.
+         */
+        $(document).ready(function () {
+            $("#description").append("Forrás: PCGURU");
+            $(".weapon").css("font-weight", "bold");
+            $("#field").css("background-color", "green");
+            $("#hide").click(function (){
+                $("#worm").hide();
+            });
+            $("#show").click(function (){
+                $("#worm").show();
+            });
+            $("#jump").click(function (){
+                $("#worm")
+                    .animate({top: "-=100"})
+                    .animate({top: "+=100"});
+            });
+            $("#buttons").append('<div id="csere" class="button">Csere</div>');
+            $("#csere").click(function (){
+                $("#worm").attr('src', 'worm2.png');
+            });
+            $(".weapon").each(function (){
+                var txt = $(this).text();
+                var txt_new= '"' + txt + '"';
+                $(this).text(txt_new);
+            });
+        });
+
+    </script>
+</head>
+<body>
+<div id="app">
+    <div id="description">
+        A fegyverarzenálról csak szuperlatívuszokban tudok beszélni, hiszen minden ínycsiklandozó eszközt összekapartak
+        a fejlesztők a korábbi epizódokból (na jó, azért MINDET nem), és öt teljesen új fegyver is bemutatkozik, így
+        összesen negyven fölé emelkedik a lehetőségek száma. A régiek közül csak hogy a legjobbakat említsem:
+        <span class="weapon">Armageddon</span>, <span class="weapon">Earthquake</span>, <span class="weapon">Banana Bomb</span>, <span class="weapon">Super Sheep</span>, <span class="weapon">Holy Hand Grenade</span>, <span class="weapon">Concrete Donkey</span>, <span class="weapon">Napalm</span>, <span class="weapon">Poison Strike</span>,
+        <span class="weapon">Baseball Bat</span> és még sorolhatnám. Új dolog például az égből nyílegyenesen leküldhető <span class="weapon">Bunker Buster</span> támadás, mely
+        képes befúrni a föld alá is, hogy pontosan egy kukac fején robbanjon szét (a <span class="weapon">Mole Bomb</span> utódja), aztán kapunk egy
+        földre helyezhető mozgásérzékelős gépágyút, amely egyébként pályaelemként is fel szokott tűnni. <br />
+    </div>
+
+    <div id="game">
+        <div id="bg">
+            <div id="field"></div>
+            <img id="worm" src="worm.png"/>
+        </div>
+        <div id="buttons">
+            <div id="hide" class="button">Elrejt</div>
+            <div id="show" class="button">Megjelenít</div>
+            <div id="jump" class="button">Felugrik</div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

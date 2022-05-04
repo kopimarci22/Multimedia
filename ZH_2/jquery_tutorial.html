@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- A Jquery könyvtárának elérése a webes megközelítésből-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        // Body háttér színének beállítása css() függvénnyel
+        $(function() {
+            $("body").css("background", "#FFFFFF");
+        })
+        // table páratlan elemek szerkesztése - háttér szín css() függvénnyel
+        $(function() {
+            $("table tr:even").css("background", "#00FF00");
+        })
+        //table páros elemek szerkesztése - háttér szín css() függvénnyel
+        $(function() {
+            $("table tr:odd").css("background", "#FF0000");
+        })
+        //egy elem feldolgozása, onClick event készítése rá - háttérszín megváltoztatása ebben az esetben css() függvénnyel
+        $(function() {
+            var p = $('p');
+
+            p.click(function() {
+                $(this).css("background", "#FFFFEE");
+            })
+        })
+        //kiválasztja az összes divet a weblapon belül, azon belül pedig MEGKERESI (find) azt az elemet, amelyik "strong" típusú
+        $(function() {
+            var p = $('div').find("strong");
+            console.log(p);
+        })
+        // objektumoknak van inner html adattagja - mindegyiknek - html() és a text() ezekre tud hivatkozni
+        // különbség a kettő között, hogy ha egy elemnek a gyeremekeit szeretnénk úgy kezelni, hogy ez egy hierarchikus szerkezetként szeretnénk kezelni
+        // - mint például egy táblázat celláit, mint sor, és vagy oszlop - akkor arra a html() függvénnyel tudjuk kezelni
+        //abban az esetben, ha egy szövegnek nincs beágyazott objektum tartalma, hanem csak szöveg van benne, akkor a text() függvényt illdomos meghívni
+        $(function() {
+            $('p').html("html() eljaras");
+            $('p.elso').text("text() eljaras");
+        })
+        // ha van egy elemünk, megkeressük először - átadjuk egy változónak - 
+        // az append esetében először a változót jelöljük ki, majd utána írjuk zárójelbe, mit szeretnénk hozzáadni
+        // az appendTo esetében először azt írjuk ki egy $-el ellátott zárójelben, hogy mit szeretnénk hozzáadni, majd utána hívjuk meg az appendTo() függvényt
+        $(function() {
+            var h = $('h1');
+            h.append("<span>append</span>");
+            $("<span> - appendTo</span>").appendTo(h);
+        })
+        // stílus variálása - Jqueryben css() függvénnyel lehet - egy objektumot kell átadni a css()-nek, majd kulcspárokat megadni
+        $(function() {
+            var h = $('h2');
+            h.css({
+                "background": "red",
+                "padding-left": "50px",
+            });
+        })
+        // osztály változtatása html elemeknek - addClass() hozzáadni lehet, removeClass()-val elvenni lehet osztályt
+        $(function() {
+            var h = $('h3');
+            h.last().addClass("test");
+            h.last().removeClass("test");
+        })
+        // egy elem attribútumának lekérdezése, beállítása
+        $(function() {
+            var title = $('h4').attr("title");
+            $("div").text(title);
+        })
+        // click() illetve on() függvények
+        // click() - az objektumra kattintva történik meg az esemény
+        $(function() {
+            $('div').click(function() {
+                $(this).width("200px");
+            })
+        })
+        // on() - a "click" esemény hatására történik meg az esemény
+        $(function() {
+                $('div').on("click", function() {
+                    $(this).width("200px")
+                })
+            })
+            // Ha csak kattintást akarunk, akkor a click() függvény rövidebb, egyszerűbb
+            // Ha nem kattintást akarunk, vagy mást, akkor az on() függvényben megadjuk melyik eseménykezelőt szeretnénk alkalmazni (akár billentyűzet, egér mozgatás stb)
+
+        // off() - esemény kezelő levétele
+        $(function() {
+            $("a").off("click");
+        })
+        // show(), hide()
+        $(function() {
+            var h = $('h5');
+            h.show();
+        })
+        $(function() {
+            var h = $('h6');
+            h.hide();
+        })
+        // Animáció
+        $(function() {
+            $(".klikk-animate").click(function() {
+                $(".animate").animate({ // az animate függvény változtat az alábbi paraméterek szerint adott idő alatt:
+                    opacity: '0.5', // átlátszóság
+                    height: '200px', //magasság
+                    width: '200px' //szélesség
+                }, 2000); // 2000 itt azt jelenti, hogy 2000ms alatt 
+            });
+        });
+        // each() - Ha például egy listában több elemünk van, akkor nem feltétlen egyértelmű, hogy a Jquery mit jelöl ki, ebben az esetben két elemet jelöl ki
+        // ha szeretnénk megkülönböztetni, akkor az each() függvényt alkalmazzuk
+        // végig megyünk az összes listaelemen, és a $(this)-el tudunk a munka közben hivatkozni az aktuálisan feldolgozandó listaelemre
+        $("li").each(function(index) {
+            console.log(index + ": " + $(this).text());
+        })
+    </script>
+    <title>gyak6_multimedia</title>
+</head>
+
+<body>
+    <table>
+        <tbody>
+            <tr>
+                <td>Sor 1</td>
+            </tr>
+            <tr>
+                <td>Sor 2</td>
+            </tr>
+            <tr>
+                <td>Sor 3</td>
+            </tr>
+            <tr>
+                <td>Sor 4</td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <br>
+    <p class="elso">Szeretem a pizzát sajnos nagyon</p>
+    <p>Ez a paragrafus az html() funkció miatt létezik</p>
+    <br>
+    <h1>Ez a sor az append és az appendTo miatt létezik - </h1>
+    <br>
+    <h2>Ez a sor egy css kijelőlő miatt létezik</h2>
+    <br>
+    <h3>Ez a sor az addClass(), és a removeClass() függvény miatt létezik</h3>
+    <br>
+    <h4>Ez a sor az elemek attribútumának lekérdezése, beállítása miatt létezik</h4>
+    <br>
+    <a href="#">Ez a sor az off() függvény miatt létezik</a>
+    <br>
+    <h5>Ez a sor a show() függvény miatt létezik</h5>
+    <h6>Ezt a sort a hide() függvény miatt nem látod</h6>
+    <br>
+    <p class="animate">random</p>
+    <br>
+    <ul>
+        <li>foo</li>
+        <li>bar</li>
+    </ul>
+    <br>
+</body>
+
+</html>

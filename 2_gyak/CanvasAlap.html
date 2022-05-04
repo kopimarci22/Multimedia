@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Első gyakorlat</title>
+</head>
+<body>
+    <canvas id="vaszon" width="800px" height="600px"></canvas>
+<style>
+    #vaszon {
+        width: 800px;
+        height: 600px;
+        border: solid black 1px;
+    }
+    * {
+        margin: 0;
+        padding: 0;
+    }
+</style>
+<script>
+    var c = document.getElementById('vaszon');
+    var ctx = c.getContext("2d");
+    ctx.moveTo(50,30);
+    ctx.lineTo(200,100);
+    ctx.stroke();
+
+    ctx.moveTo(250,30);
+    ctx.lineTo(400,100);
+    ctx.lineTo(500,300);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.arc(400,300,25, 0, 2 * Math.PI);
+    ctx.rect(500,500,25,100);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.font = "20px Times New Roman";
+    ctx.fillText("Valami",150,200)
+    ctx.strokeText("Üres Valami",150,250)
+    ctx.stroke;
+
+    var grd = ctx.createLinearGradient(0,0,200,0);
+    grd.addColorStop(0, "red");
+    grd.addColorStop(0.2, "blue");
+    grd.addColorStop(1, "green");
+
+    ctx.fillStyle = grd;
+    ctx.fillRect(10,300,300,300);
+
+    var img = new Image();
+    img.onload = function(){
+        ctx.drawImage(img, 550,50,200,200);
+    }
+    img.src = 'catfries.jpg';
+</script>
+</body>
+</html>

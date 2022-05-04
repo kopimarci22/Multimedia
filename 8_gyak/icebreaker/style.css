@@ -1,0 +1,48 @@
+/* Margó és padding 0, fekete háttér*/
+body {
+    margin: 0;
+    padding: 0;
+    background: black;
+}
+
+/*  Játékterület pont középen legyen.
+    Mivel a top és a left 50%, így a játéktér bal
+    felső sarka pont középen lenne.
+    Ebből vonjuk le a szélesség és magasság felét,
+    így a középpont lesz az oldal közepén.
+ */
+#gamearea {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -250px;
+    margin-top: -250px;
+    width: 500px;
+    height: 500px;
+    border: solid gray 2px;
+}
+
+/*  Víz beállítása, szín, elhelyezkedés, szegély.
+    z-index: azt állítjuk be, hogy egymáson lévő
+    elemek közül melyik hol legyen. Minél nagyobb,
+    annál előrébb van az elem.
+    Csak akkor működik, ha az elem pozícionált.
+    (position:absolute, position:relative, or position:fixed)
+    Absolute esetén kikerül a megjelenés folyamából, megadhatunk neki
+    különféle elhelyezkedési értékeket, méretet.
+ */
+.water {
+    background: navy;
+    position: absolute;
+    z-index: 0;
+    border: solid #666 1px;
+}
+
+.ice {
+    background: aliceblue;
+}
+
+#ship {
+    z-index: 1;
+    position: absolute;
+}

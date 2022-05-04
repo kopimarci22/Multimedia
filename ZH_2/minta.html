@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>2. zh</title>
+
+</head>
+<body>
+<h1>2. kis ZH</h1>
+<h3>Minta ZH</h3>
+<p>Név: </p>
+<p>Neptun kód: </p>
+<p>hxxx azonosító: </p>
+
+<p>
+    A feladat könyvtár csak olvasható. Másold a fájlokat egy szinttel feljebb, és azon dolgozz.
+    <span>
+            Írd fel az adataidat a megfelelő helyre!
+    </span>
+</p>
+
+<ol>
+    <li> A játékos képe kezdéskor "sapkás-dinamitos" kukac (worm2.png), de az "egyszerű" kukac képével (worm.png) kellene indulnia a játéknak. Oldjuk meg, hogy kezdetben ez utóbbi kép jelenjen meg. (1p) </li>
+    <li> Jelenleg minden bomba ugyanott hullik le. Legyen inkább a bombák kezdő pozíciója a repülőgép helyzetétől függő. (1p)</li>
+    <li> Csökkentsük a bombák hullásának gyakoriságát! </li>
+    <li> Mikor földet ér egy bomba, rajzoljunk köré egy tetszőleges színű kört. (1p) </li>
+    <li> Tegyük lehetővé a kukac bináris állapotjelzőjének - "isWormStateDefault" - megváltoztatását bal egérgombbal való DUPLA kattintás esetén. Az állapotjelző értékét írjuk a konzolra! (1p) </li>
+    <li> A kukac állapotváltozójának - "isWormStateDefault" - függvényében rajzoljuk meg a kukacot az "egyszeru" vagy a "sapkás-dinamitos" képpel. (1p) </li>
+</ol>
+
+<br>
+
+<canvas id="game" width="600" height="600"></canvas>
+
+<script>
+
+    var c = document.getElementById("game");
+    var ctx = c.getContext("2d");
+
+    INTERVALID = null;
+
+    // valtozo a kukac kepenek
+    var wormImg;
+    // valtozo a repulo kepenek
+    var planeImg;
+    // a repulo kezdo x koordinataja
+    var planeX = c.width;
+    // a repulo kezdo y koordinataja
+    var planeY = 50;
+    // a kukac konstans y koordinataja
+    var wormY = 460;
+    // a kukac kezdo x koordinataja
+    var wormX = 300;
+
+    // kukacos kep peldanyositasa
+    wormImg = new Image();
+    wormImg.src = "worm.png";
+
+    wormImg2 = new Image();
+    wormImg2.src = "worm2.png";
+
+    var wormW = 60;
+    var wormH = 60;
+
+    var wormStep = 20;
+
+    //ez az allapotvaltozo az 5. es 6. feladatok megoldasahoz kell majd
+    isWormStateDefault = true;
+
+    // repulos kep peldanyositasa
+    planeImg = new Image();
+    planeImg.src = "plane.png";
+    // a repulo mereteinek valtozoba mentese
+    var planeW;
+    var planeH;
+
+    // tomb definicio a bombaknak
+    var bombList = [];
+
+    // az animacioert felelos fuggveny meghivasa
+    planeImg.onload = function() {
+
+        planeW = planeImg.width;
+        planeH = planeImg.height;
+
+        INTERVALID = setInterval(animate, 20);
+    };
+
+    function animate() {
+        requestAnimationFrame(draw);
+    }
+
+    function stop(){
+        clearInterval(INTERVALID);
+    }
+
+    // az egyes kirajzolasokert felelos fuggveny
+    function draw() {
+        drawPlane();
+        drawWorm();
+        //TODO. 6. feladat megoldasa, 2. lepes:
+        //drawWormByState(isWormStateDefault);
+        dropBomb();
+        drawBombs();
+        removeBombs();
+    }
+
+    // repulogep kirajzolasa
+    function drawPlane() {
+        // a hatter mindenkori ujrarajzolasa
+        drawBackground();
+        ctx.drawImage(planeImg, planeX, planeY, planeW / 4, planeH / 4);
+        // a repulogep mozgasa
+        planeX -= 3;
+        // amennyiben a repulo elhagyja a vasznat, akkor tegyuk vissza a kezdopoziciojara,
+        // igy folyamatosan mozogni fog
+        if (planeX < 0 - planeW / 4) {
+            planeX = 600;
+        }
+
+    }
+
+    // hatter megrajzolasa
+    function drawBackground() {
+        ctx.fillStyle = "#95e9ff";
+        ctx.fillRect(0, 0, c.width, c.height);
+        ctx.fillStyle = "green";
+        ctx.fillRect(0, 500, c.width, 100);
+    }
+
+    // kukac kirajzolasa
+    function drawWorm() {
+        //TODO: 1. feladat megoldasa:
+         ctx.drawImage(wormImg, wormX, wormY, wormW, wormH);
+        //ctx.drawImage(wormImg2, wormX, wormY, wormW, wormH);
+    }
+
+    //TODO: 6. feladat megoldasa, 1. lepes:
+    /*function drawWormByState(state) {
+        if (state){
+            ctx.drawImage(wormImg, wormX, wormY, wormW, wormH);
+        }
+        else{
+            ctx.drawImage(wormImg2, wormX, wormY, wormW, wormH);
+        }
+    }*/
+
+    // random idokozonkent dobjunk le egy bombat. ehhez figyelembe kell venni a repulo aktualis x  es y poziciojat,
+    // hisz innen inditjuk a bombat. ezt a poziciot taruljuk az erre letrahozott tombben
+    function isNewBombAdded(){
+        const threshold = 0.95;
+        //TODO: 3. feladat megoldasa:
+        //const threshold = 0.99;
+        return Math.random() > threshold ? true : false;
+    }
+
+    function dropBomb() {
+        if (isNewBombAdded()) {
+            var bombCoordinates =  {x: 100, y: 100};
+            //TODO: 2. feladat megoldasa:
+
+            var bombCoordinates = {
+                x: planeX + 30,
+                y: planeY + planeImg.height / 4
+            }
+
+            bombList.push(bombCoordinates);
+        }
+    }
+
+    // ha leert a bomba vagy a listankban van mar kovetkezo, akkor vegyuk ki a listarol
+    function removeBombs() {
+        if (bombList.length > 0 && bombList[0].y > 500) {
+            //TODO: 4. feladat megoldasa, 2. lepes:
+            drawExplosion(bombList[0].x, bombList[0].y);
+            bombList.shift();
+        }
+    }
+
+    //TODO: 4. feladat megoldasa, 1. lepes:
+    function drawExplosion(x,y){
+        ctx.fillStyle = "red";
+        ctx.beginPath();
+        ctx.arc(x, y, 20, 0, 2 * Math.PI);
+        ctx.fill();
+    }
+
+    // a listaba gyujtott bombak kirajzolasa
+    function drawBombs() {
+        for (var i in bombList) {
+            var bomb = bombList[i];
+
+            ctx.fillStyle = "#5f5e65";
+            ctx.beginPath();
+            ctx.arc(bomb.x, bomb.y, 10, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.fillRect(bomb.x - 10, bomb.y - 20, 20, 20);
+            bomb.y += 6;
+        }
+    }
+
+    //  billentyu esemeny lekezelese
+    function wormMove(e) {
+        // megnezem, hogy mi az aktualisan lenoymott gomb
+        var key = e.which;
+        // ha a jobbra nyil vagy balra nyil, akkor a kukacot a leptetem,
+        // de ek arra, hogy ne menjen le a vaszonrol
+        if (key == 39) {
+            if (wormX < c.width - wormW - wormStep) {
+                wormX += wormStep;
+            }
+        } else if (key == 37) {
+            if (wormX > wormStep) {
+                wormX -= wormStep;
+            }
+        }
+    }
+
+    // billentyuzet esemeny figyelese az ablakra merten
+    window.addEventListener('keydown', wormMove, false);
+
+    // eger esemeny lekezelese
+    function wormMouseMove(ev) {
+        // uegyelni kell arra, hogy az adott HTML elemnek (CANVAS) figyelembe vegyunk a pozicioit is,
+        // amikor meghatarozzuk az egerpoziciot, mielott azt atadjuk a kukact x poziciojanak es vizsgaljuk, hogy vasznon belul vagyunk-e
+        var rect = c.getBoundingClientRect();
+        var mouseX = ev.clientX - rect.left - wormStep;
+        if (mouseX > 0 && mouseX < c.width - wormW) {
+            wormX = mouseX;
+        }
+    }
+
+    // eger esemeny figyelese a vasznon
+    c.addEventListener('mousemove', wormMouseMove, false);
+
+    //TODO: 5. feladat megoldasa:
+    /*function wormStateMouseClick(ev) {
+        console.log('clicked');
+        var rect = c.getBoundingClientRect();
+        if(2 == ev.detail){
+            isWormStateDefault = !isWormStateDefault;
+            console.log(isWormStateDefault);
+        }
+    }
+
+    c.addEventListener('click', wormStateMouseClick, false);*/
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Paint - Canvas</title>
+</head>
+<body>
+<canvas id="ex" width="600" height="400" style="border:4px solid; background-color: #d4d4d4"></canvas>
+<script>
+    let c = document.getElementById("ex");
+    let ctx = c.getContext("2d");
+    let isDraw = false;
+
+    init();
+
+    function init() {
+        ctx.beginPath();
+        ctx.fillStyle = "white";
+        ctx.lineWidth = 4;
+        ctx.fillRect(10, 10, 580, 310);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.fillStyle = "green";
+        ctx.fillRect(400, 340, 40, 40);
+        ctx.beginPath();
+        ctx.fillStyle = 'red';
+        ctx.fillRect(460, 340, 40, 40);
+        ctx.beginPath();
+        ctx.fillStyle = 'blue';
+        ctx.fillRect(520, 340, 40, 40);
+
+        ctx.font = '16px Arial';
+        ctx.fillStyle = "black";
+        ctx.fillText('Vonalvastagság növelése/csökkentése: +/-', 30, 370);
+
+        ctx.font = '30px Arial';
+        ctx.fillStyle = "yellow";
+        ctx.fillText('1', 412, 370);
+        ctx.fillText('2', 472, 370);
+        ctx.fillText('3', 532, 370);
+
+        ctx.lineWidth = 1;
+    }
+
+    function draw(e) {
+
+    }
+
+    function changeColor(e) {
+
+    }
+
+</script>
+</body>
+</html>
