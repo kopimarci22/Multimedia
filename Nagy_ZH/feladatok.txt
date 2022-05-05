@@ -1,0 +1,46 @@
+1. Hozz létre egy DIV-et (játéktér), fekete háttérszínnel és 5px széles szegéllyel!
+
+2. Az imént létrehozott DIV-ben alakíts ki 8 sorban és 8 oszlopban elhelyezett 8x8 egyforma DIV-et (csempék)!
+
+3. Legyen a csempéknek szegélye, ami 4px széles, és legyen margójuk is, ami 2px széles! Hozzunk létre egy stílus
+   osztályt az alapértelmezett csempe stílus leírására! 
+
+5. Hozzunk létre két újabb stílus osztályt a csempéknek, amelyek most csak abban különböznek, hogy milyen
+   színt társítunk a szegélyükhöz. Az egyik ('enabled') osztály esetén zöld, a másik ('disabled') osztály esetén
+   szürke színt használjunk! 
+
+6. A csempéket most úgy hozzuk létre, hogy legyen rájuk érvényes az alapértelmezett csempe stílus, de 0.5 eséllyel
+   tartozzanak az 'enabled' vagy 'disabled' osztályok egyikébe is!
+
+7. Csak az 'enabled' csempékhez adjunk egy új attribútumot, 'clicks' névvel, ami kezdetben 0 értéket kapjon!
+
+8. Minden csempének legyen egy 'row' és 'col' attribútuma, ami a csempe sor és oszlopindexét kapja értékül!
+
+9. Csak az 'enabled' csempékhez adjunk eseménykezelőt, ami egérrel való kattintásra hívódik meg! Egyelőre elég, ha az 
+   esemény tényét jelezzük a konzolon.
+
+10. Egérkattintás hatására növeljük a csempéhez rendelt 'clicks' attribútumot egy küszöbértékig (ez lehet pl. 3)! Miközben
+    módosítjuk a csempe 'clicks' attribútumát, ne felejtsük el letiltani az eseménykezelést az aktuális és az összes többi 
+    csempén egyaránt! A műveletek elvégzése után újra figyelnünk kell az eseményeket.
+
+11. Ha nem értük még el a 10. feladatban megadott küszöbértéket, akkor animáltan csökkentsük a csempe 'opacity' értékét 0-ra!
+    Az animáció időtartamát állítsuk be úgy, hogy jól követhető legyen! Az eseménykezelés tiltása és engedélyezése itt is
+    fontos követelmény. 
+
+12. Láncoljunk egy újabb animációt az előzőhöz! Ha az első (11. feladat) animáció lefutott, rögtön következzen a második, 
+    amelynek során az 'opacity' visszaáll 1-re! A kattintásokra csak a második animáció végeztével reagálhatnak a csempék.
+
+13. Ha egy csempén elértük a maximális kattintás-számot, akkor változzon a csempe szegélye pirosra! Ez az utolsó animáció végén
+    következzen be!
+
+14. Olvassuk be a kukacot a 'worm.png' fájlból! A kukacnak létrehozott objektumot rendeljük kezdetben az [5, 2] indexű csempéhez,
+    de ne használjunk ciklust, inkább a megfelelő jQuery lekérdezéssel válasszuk ki az adott csempét!
+
+15. Minden érvényes kattintás után, ha már végbement(ek) az animáció(k), helyezzük át a kukacot a legutóbbi kattintással 
+    kijelölt csempére.
+
+16. Adjunk a csempék stílusbeállításaihoz 'mouse-hover' effektust! Mikor az egérkurzor egy adott csempe fölött van, legyen a
+    csempe háttérszíne sárga.
+
+17. Gondolkodjunk el más lehetőségeken is! Pl. a kukac áthelyezése más user input alapján, több réteg segítségével megvalósítható
+    effektusok stb... Az ötleteket próbáljuk ki, kiindulási alapként a példamegoldást használva! 

@@ -1,0 +1,31 @@
+body{
+    margin: 0;
+    padding: 20px;
+}
+
+.tile {
+    position: absolute;
+    background-color: rgb(115, 255, 50);
+    cursor: pointer;
+}
+
+.tile:hover {
+    background-color: yellow;
+}
+
+.disabled {
+    border-style: solid;
+    border-color: grey;
+}
+
+.enabled{
+    border-style: solid;
+    border-color: green;
+}
+
+#gameArea {
+    position: relative;
+    padding: 0px;
+    background-color: black;
+    border: solid grey 5px;
+}
