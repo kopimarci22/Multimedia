@@ -1,9 +1,9 @@
 const max_clicks = 3;
 
 const table_sz = 8;
-const tile_sz = 88;
-const border_w = 4;
-const margin_w = 2;
+const tile_sz = 100;
+const border_w = 0;
+const margin_w = 0;
 
 const animation_length = 1600;
 
@@ -12,15 +12,9 @@ let worm_pos = [0, 0];
 
 function createTile(row, col){
     let tile;
-    if (0.5 < Math.random() ){
-        tile = $('<div class = "tile disabled"></div>');
-    }
-    else{
-        tile = $('<div class = "tile enabled"></div>');
-        tile.attr('clicks', 0);
-    }
-    tile.css("margin", margin_w.toString() + "px");
-    tile.css("border-width", border_w.toString() + "px");
+
+    tile = $('<div class = "tile d"></div>');
+    tile.attr('clicks', 0);
     tile.attr('row', row);
     tile.attr('col', col);
     tile.css( {
@@ -31,11 +25,36 @@ function createTile(row, col){
     } );
     return tile;
 }
+function createTileCover() {
+
+}
+// function createFly() {
+//     let fly = $('<img src="fly.png" id=""fly>');
+//     fly.css({
+//         width: tile_sz,
+//         height: tile_sz
+//     })
+//
+// }
 
 function createTable(){
     for (let row = 0; row < table_sz; ++row){
         for (let col = 0; col < table_sz; ++col) {
             let tile = createTile(row, col);
+            if ((col+row) % 2 === 1) {
+                tile.css("background-color", "white")
+            } else {
+                tile.css("background-color", "black")
+            }
+            if (row == 2 && col == 1) {
+                let fly = $('<img src="fly.png" id=""fly>');
+                fly.css({
+                    width: tile_sz,
+                    height: tile_sz
+                })
+                tile.append(fly);
+            }
+
             game_area.append(tile);
         }
     }
@@ -61,11 +80,11 @@ function createWorm(){
 }
 
 function addClickEvents(){
-    game_area.find('.tile.enabled').on('click', update);
+    game_area.find('.tile').on('click', update);
 }
 
 function clearClickEvents(){
-    game_area.find('.tile.enabled').off('click');
+    game_area.find('.tile').off('click');
 }
 
 function selectWorm(){
